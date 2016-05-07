@@ -1,8 +1,10 @@
 import ystockquote
+import max7219.led as led
 import time
 from decimal import Decimal
 stock_list= ['%5EIXIC', '%5EGSPC', 'INCY']
-
+device = led.matrix(cascaded = 4)
+device.brightness(1)
     
 def get_time():
     return time.strftime("%I:%M")
@@ -33,4 +35,5 @@ def stocks():
 #print(get_percent_change('GOOG'))
 #print(get_percent_change('INCY'))
 #print isinstance(get_percent_change('INCY'), str)
-print(stocks())
+while True:
+    device.show_message(stocks())
