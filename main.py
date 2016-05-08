@@ -22,9 +22,12 @@ def get_percent_change(symbol):
 def stocks():
     stock_output = ''
     for stock in stock_list:
-        #print(stock)
-        #print(get_percent_change(stock))
-        stock_output = stock_output+stock+' '+get_percent_change(stock)+' '
+        name = stock
+        if stock == '%5EIXIC':
+            name = 'NDAQ'
+        elif stock == '%5EGSPC':
+            name = 'S&P'
+        stock_output = stock_output+name+' '+get_percent_change(stock)+'% '
         #stock_output = stock_output+' '+get_percent_change(stock)
     return stock_output
 
