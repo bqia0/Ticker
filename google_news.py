@@ -3,7 +3,7 @@ from newspaper import Article
 import feedparser
 
 output = ' '
-device = led.matrix(cascaded = 4)
+device = led.matrix(cascaded = 5)
 device.brightness(1)
 rss_feed = 'http://news.google.com/news?cf=all&hl=en&pz=1&ned=us&topic=w&output=rss'
 d = feedparser.parse(rss_feed)
@@ -17,12 +17,15 @@ def get_title(link):
 def get_news():
     global output 
     for x in d.entries:
-        #print get_title(x.link)
-
-        output = output+get_title(x.link)+'      '
-
-while True:
-    get_news()
-    for x in xrange(10):
-        device.show_message(output)
-    
+        title = get_title(x.link)
+        print title
+        output = output+ title+ '     '
+        #device.show_message(get_title(x.link))
+try:
+    while True:
+        get_news()
+        for x in xrange(0,9):
+            device.show_message(output)
+except IndexError:
+    print output
+    print "shits fucked up again idiot"
